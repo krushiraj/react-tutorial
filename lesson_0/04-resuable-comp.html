@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Hello</title>
+    <!-- <link rel="stylesheet" href="assets/style.css"> -->
+  </head>
+
+  <body>
+    <div id="root"></div>
+
+    <script
+      crossorigin
+      src="https://unpkg.com/react@16/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script type="text/babel">
+      // check function
+      // pass children as a prop
+      // pass content as a prop
+      // naming convention
+      const BlogComp = ({ title, content, children }) => {
+        console.log({ title, content, children });
+        return (
+          <div className="blog">
+            <h2 className="blog--title">{title}</h2>
+            <p className="blog--content">{content || children}</p>
+          </div>
+        );
+      };
+
+      const Counter = () => {
+        const [count, setCount] = React.useState(0);
+
+        const handleClick = (e) => {
+          setCount(count + 1);
+        };
+
+        return (
+          <div>
+            <p
+              style={{
+                color: "red",
+                textDecoration: "underline",
+                fontSize: "20px",
+              }}
+            >
+              Count: ${count}
+            </p>
+            <button
+            style={{
+              color: 'white',
+              backgroundColor: '#c2af2a',
+              padding: '10px',
+              borderRadius: '5px',
+            }}
+            onClick={handleClick}>Increment</button>
+          </div>
+        );
+      };
+
+      const blogs = (
+        <div className="blog--wrap">
+          <Counter />
+          {BlogComp({
+            title: "Hello World",
+            content:
+              "React is a JavaScript library, and so we’ll assume you have a basic understanding of the JavaScript language.",
+          })}
+          {BlogComp({
+            title: "Thinking in React",
+            content:
+              "One of the many great parts of React is how it makes you think about apps as you build them.",
+          })}
+          {BlogComp({
+            title: "ENE",
+            content: "Ee Nagaraniki Emaindi",
+          })}
+          <BlogComp
+            title="React.js in 2 hrs"
+            content="This is a tutorial to React.js"
+          />
+          <BlogComp title="Example Title">
+            <p>First para</p>
+            <p>Second Para</p>
+          </BlogComp>
+        </div>
+      );
+
+      /*
+      <BlogComp
+        title="Lifting State Up"
+        content="Often, several components need to reflect the same changing data. We recommend lifting the shared state up to their closest common ancestor."
+      />
+      /**/
+      /*
+      <BlogComp
+        title="Lifting State Up"
+      />
+        Often, several components need to reflect the same changing data. We recommend lifting the shared state up to their closest common ancestor.
+      </BlogComp>
+      /**/
+      ReactDOM.render(blogs, document.getElementById("root"));
+      /**/
+
+      /*
+      You would normally have a dev environment setup to
+      do the transpiling of babel to JSX.
+      /**/
+    </script>
+  </body>
+</html>
